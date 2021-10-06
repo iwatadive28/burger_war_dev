@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 import rospy
 import random
-
+import math
+pi = math.pi
 from geometry_msgs.msg import Twist
 
 import tf
-
 
 import actionlib
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
@@ -22,25 +22,23 @@ import actionlib_msgs
 
 class NaviBot():
     def __init__(self):
-        
         # velocity publisher
         self.vel_pub = rospy.Publisher('cmd_vel', Twist,queue_size=1)
-        self.client = actionlib.SimpleActionClient('move_base',MoveBaseAction)
-
-
-
+        self.client  = actionlib.SimpleActionClient('move_base',MoveBaseAction)
 
     def setGoal(self,x,y,yaw):
         self.client.wait_for_server()
 
         goal = MoveBaseGoal()
-        goal.target_pose.header.frame_id = "map"
-        goal.target_pose.header.stamp = rospy.Time.now()
+        goal.target_pose.header.frame_id = "map"  
+        goal.target_pose.header.stamp    = rospy.Time.now()
+
         goal.target_pose.pose.position.x = x
         goal.target_pose.pose.position.y = y
 
         # Euler to Quartanion
-        q=tf.transformations.quaternion_from_euler(0,0,yaw)        
+        q = tf.transformations.quaternion_from_euler(0,0,yaw)
+        # import pdb; pdb.set_trace()
         goal.target_pose.pose.orientation.x = q[0]
         goal.target_pose.pose.orientation.y = q[1]
         goal.target_pose.pose.orientation.z = q[2]
@@ -57,19 +55,77 @@ class NaviBot():
 
     def strategy(self):
         r = rospy.Rate(5) # change speed 5fps
-
-        self.setGoal(-0.5,0,0)
-        self.setGoal(-0.5,0,3.1415/2)
         
-        self.setGoal(0,0.5,0)
-        self.setGoal(0,0.5,3.1415)
-        
-        self.setGoal(-0.5,0,-3.1415/2)
-        
-        self.setGoal(0,-0.5,0)
-        self.setGoal(0,-0.5,3.1415)
+        goal_xyyaw = [-0.5 ,0, 0]
+        print('self.setGoal(' +str(goal_xyyaw) + ')')
+        self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
 
+        goal_xyyaw = [-0.5 ,0, pi/2]
+        print('self.setGoal(' +str(goal_xyyaw) + ')')
+        self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
 
+        goal_xyyaw = [-0.5 ,0, -pi/2]
+        print('self.setGoal(' +str(goal_xyyaw) + ')')
+        self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
+
+        goal_xyyaw = [0 ,0.5, 0]
+        print('self.setGoal(' +str(goal_xyyaw) + ')')
+        self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
+
+        goal_xyyaw = [0 ,0.5, -pi/2]
+        print('self.setGoal(' +str(goal_xyyaw) + ')')
+        self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
+
+        goal_xyyaw = [0 ,0.5,  pi]
+        print('self.setGoal(' +str(goal_xyyaw) + ')')
+        self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
+
+        goal_xyyaw = [0 ,0.5,  0]
+        print('self.setGoal(' +str(goal_xyyaw) + ')')
+        self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
+
+        goal_xyyaw = [0.5 ,0.5,  0]
+        print('self.setGoal(' +str(goal_xyyaw) + ')')
+        self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
+
+        goal_xyyaw = [0.5 ,0.5, pi/2]
+        print('self.setGoal(' +str(goal_xyyaw) + ')')
+        self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
+
+        goal_xyyaw = [0.5 ,0.5, pi]
+        print('self.setGoal(' +str(goal_xyyaw) + ')')
+        self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
+
+        goal_xyyaw = [0.5 ,0.5, -pi/2]
+        print('self.setGoal(' +str(goal_xyyaw) + ')')
+        self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
+
+        goal_xyyaw = [0 ,-0.5,  pi]
+        print('self.setGoal(' +str(goal_xyyaw) + ')')
+        self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
+
+        goal_xyyaw = [0 ,-0.5, pi/2]
+        print('self.setGoal(' +str(goal_xyyaw) + ')')
+        self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
+
+        goal_xyyaw = [0 ,-0.5,  0]
+        print('self.setGoal(' +str(goal_xyyaw) + ')')
+        self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
+
+        goal_xyyaw = [0 ,-0.5,  pi]
+        print('self.setGoal(' +str(goal_xyyaw) + ')')
+        self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
+
+        goal_xyyaw = [-0.5 ,0,  pi]
+        print('self.setGoal(' +str(goal_xyyaw) + ')')
+        self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
+
+        goal_xyyaw = [-1 ,0,  0]
+        print('self.setGoal(' +str(goal_xyyaw) + ')')
+        self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
+
+        print('END')
+        
 
 if __name__ == '__main__':
     rospy.init_node('navirun')
