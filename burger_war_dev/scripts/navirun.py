@@ -56,19 +56,27 @@ class NaviBot():
     def strategy(self):
         r = rospy.Rate(5) # change speed 5fps
         
-        goal_xyyaw = [-0.5 ,0, 0]
+        goal_xyyaw = [-0.8 ,0, 0]
         print('self.setGoal(' +str(goal_xyyaw) + ')')
         self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
 
-        goal_xyyaw = [-0.5 ,0, pi/2]
+        goal_xyyaw = [-0.8 ,-0.2, -pi/3]
         print('self.setGoal(' +str(goal_xyyaw) + ')')
         self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
 
-        goal_xyyaw = [-0.5 ,0, -pi/2]
+        goal_xyyaw = [-0.8 ,0, pi/2]
         print('self.setGoal(' +str(goal_xyyaw) + ')')
         self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
 
-        goal_xyyaw = [0 ,0.5, 0]
+        goal_xyyaw = [-0.8 , 0.2, 0]
+        print('self.setGoal(' +str(goal_xyyaw) + ')')
+        self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
+
+        goal_xyyaw = [-0.5 , 0.2, 0]
+        print('self.setGoal(' +str(goal_xyyaw) + ')')
+        self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
+
+        goal_xyyaw = [0 ,0.5, -pi/2]
         print('self.setGoal(' +str(goal_xyyaw) + ')')
         self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
 
@@ -80,23 +88,27 @@ class NaviBot():
         print('self.setGoal(' +str(goal_xyyaw) + ')')
         self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
 
-        goal_xyyaw = [0 ,0.5,  0]
+        goal_xyyaw = [0.2,0.5,  pi]
         print('self.setGoal(' +str(goal_xyyaw) + ')')
         self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
 
-        goal_xyyaw = [0.5 ,0.5,  0]
+        goal_xyyaw = [0.2,0.5,-pi/3]
         print('self.setGoal(' +str(goal_xyyaw) + ')')
         self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
 
-        goal_xyyaw = [0.5 ,0.5, pi/2]
+        goal_xyyaw = [0.5 ,  0,  0]
         print('self.setGoal(' +str(goal_xyyaw) + ')')
         self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
 
-        goal_xyyaw = [0.5 ,0.5, pi]
+        goal_xyyaw = [0.5 ,  0, pi/2]
         print('self.setGoal(' +str(goal_xyyaw) + ')')
         self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
 
-        goal_xyyaw = [0.5 ,0.5, -pi/2]
+        goal_xyyaw = [0.5 ,  0, pi]
+        print('self.setGoal(' +str(goal_xyyaw) + ')')
+        self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
+
+        goal_xyyaw = [0.5 ,  0, -pi/2]
         print('self.setGoal(' +str(goal_xyyaw) + ')')
         self.setGoal(goal_xyyaw[0],goal_xyyaw[1],goal_xyyaw[2])
 
