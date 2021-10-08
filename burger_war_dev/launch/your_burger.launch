@@ -15,8 +15,13 @@
     <!-- Navigation sample program  -->
     
     <include file="$(find burger_navigation)/launch/burger_navigation.launch" />
-    <node pkg="burger_war_dev" type="navirun_rikakei.py" name="navirun" output="screen"/>
-    
+
+    <node pkg="burger_war_dev" type="navirun_RikaK.py" name="navirun_RikaK" output="screen">
+      <param name="rside" value="r" />  <!-- this bot works on blue side with "side="r"", why? -->
+    </node> 
+
+
+
     <!-- END Navigation sample program node -->
 
     <!-- End of your space  -->
