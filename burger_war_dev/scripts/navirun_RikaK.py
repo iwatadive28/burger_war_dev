@@ -97,29 +97,6 @@ class NaviBot():
     def strategy(self):
         r = rospy.Rate(5) # change speed 5fps
         goal_xyyaw = get_goals(self.my_color)
-        '''
-        goal_xyyaw = np.array([
-            [-0.8  ,0     , 0    ], # (1） 
-            [-0.8  ,-0.2  ,-pi/3 ], 
-            [-0.8  ,0     , pi/2 ],
-            [-0.8  , 0.2  , 0    ],
-            [-0.5  , 0.2  , 0    ],
-            [0     ,0.5   ,  pi  ], # (2)
-            [0     ,0.5   , -pi/2],
-            [0.2   ,0.5   ,  0   ],
-            [0.2   ,0.5   ,-pi/3 ],
-            [0.5   ,  0   ,  0   ], #（3）
-            [0.5   ,  0   , pi   ],
-            [0.5   ,  0   , -pi/2],
-            [0.2   ,-0.5  ,  pi  ],
-            [0.2   ,-0.5  ,  0   ],
-            [0     ,-0.5  ,  0   ], # (4)
-            [0     ,-0.5  , pi/2 ],
-            [0     ,-0.5  ,  pi  ],
-            [-0.5  ,0     ,  pi  ], # (5) 
-            [-1.40 ,0     ,  0   ]
-        ])
-        '''
         # import pdb; pdb.set_trace()
         
         for ii in range(goal_xyyaw.shape[0]):

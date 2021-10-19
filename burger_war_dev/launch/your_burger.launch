@@ -20,8 +20,6 @@
       <param name="rside" value="r" />  <!-- this bot works on blue side with "side="r"", why? -->
     </node> 
 
-
-
     <!-- END Navigation sample program node -->
 
     <!-- End of your space  -->
