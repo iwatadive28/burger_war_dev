@@ -236,6 +236,8 @@ class NaviBot():
         map_name=self.robot_namespace+'/map'
         is_enemy_detected, x, y = self.getEnemyPos(map_name)
         print(is_enemy_detected)
+        
+        '''
         symbol = 1
         th = 0
         goal_xyyaw = np.array([ 
@@ -256,14 +258,14 @@ class NaviBot():
                 [symbol * 0     , symbol * -0.4  , np.mod(-pi*4/5+ th ,2*pi) ],
                 [symbol * 0     , symbol * -0.4  , np.mod( pi    + th ,2*pi) ],
                 [symbol * -0.5  , symbol * 0     , np.mod( pi    + th ,2*pi) ] # (5) 
-        ])     
+        ])   
+        
         idx=0
-
+        '''  
         is_patrol_mode_prev = False
         is_patrol_mode = True
-        cnt = 0
-        flg = True
-
+        # cnt = 0
+        # flg = True
 
         while(True):
             r.sleep()
@@ -272,7 +274,7 @@ class NaviBot():
             detect_outer_th = 1.1 # 0.7
             if not self.is_enemy_detecting:
                 is_patrol_mode = True
-            elif self.is_enemy_detecting and flg and detect_inner_th > self.enemy_dist:
+            elif self.is_enemy_detecting and detect_inner_th > self.enemy_dist:
                 is_patrol_mode = False
             elif not is_patrol_mode and detect_outer_th < self.enemy_dist:
                 is_patrol_mode = True
