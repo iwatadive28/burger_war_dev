@@ -268,8 +268,8 @@ class NaviBot():
         while(True):
             r.sleep()
             is_patrol_mode = True
-            detect_inner_th = 1.2
-            detect_outer_th = 0.7
+            detect_inner_th = 1.1 # 1.2
+            detect_outer_th = 1.1 # 0.7
             if not self.is_enemy_detecting:
                 is_patrol_mode = True
             elif self.is_enemy_detecting and flg and detect_inner_th > self.enemy_dist:
