@@ -102,7 +102,7 @@ class NaviBot():
         print(self.robot_namespace)
         # velocity publisher
         self.vel_pub = rospy.Publisher('cmd_vel', Twist,queue_size=1)
-        self.client = actionlib.SimpleActionClient('move_base',MoveBaseAction)
+        self.client  = actionlib.SimpleActionClient('move_base',MoveBaseAction)
         #self.tfBuffer = tf.Buffer()
 
         self.enemy_detector = EnemyDetector()
@@ -129,9 +129,7 @@ class NaviBot():
         self.pose_twist.linear.x = self.speed; self.pose_twist.linear.y = 0.; self.pose_twist.linear.z = 0.
         self.pose_twist.angular.x = 0.; self.pose_twist.angular.y = 0.; self.pose_twist.angular.z = 0.
 
-
         self.is_near_wall = False
-
         self.is_second_lap = False
 
         self.is_near_enemy = False
@@ -151,13 +149,12 @@ class NaviBot():
         self.scan = []
         self.odom = Odometry()
         self.odom_prev = Odometry()
-        self.odom_diff = Odometry()
-        
+        self.odom_diff = Odometry()        
 
         # publisher
-        self.vel_pub = rospy.Publisher('cmd_vel', Twist, queue_size=1)
+        self.vel_pub  = rospy.Publisher('cmd_vel', Twist, queue_size=1)
         self.odom_pub = rospy.Publisher('odom', Odometry, queue_size= 1)
-        #self.vel_pub = rospy.Publisher('enemy_info', EnemyInfo, queue_size=1)
+        
         # subscriber
         self.is_enemy_detecting = False
         rospy.Subscriber('enemy_detected', Bool, self.save_detected )
@@ -197,13 +194,7 @@ class NaviBot():
         goal.target_pose.pose.orientation.w = q[3]
 
         self.client.send_goal(goal)
-        #wait = self.client.wait_for_result()
-        #if not wait:
-        #    rospy.logerr("Action server not available!")
-        #    rospy.signal_shutdown("Action server not available!")
-        #else:
-        #    return self.client.get_result()        
-
+        
         def active_cb():
             # rospy.loginfo("active_cb. Goal pose is now being processed by the Action Server...")
             return
@@ -236,32 +227,6 @@ class NaviBot():
         map_name=self.robot_namespace+'/map'
         is_enemy_detected, x, y = self.getEnemyPos(map_name)
         print(is_enemy_detected)
-        
-        '''
-        symbol = 1
-        th = 0
-        goal_xyyaw = np.array([ 
-                [symbol * -0.8  , symbol * 0     , np.mod(0      + th ,2*pi) ], # (1） 
-                [symbol * -0.8  , symbol * -0.2  ,-np.mod(-pi/4  + th ,2*pi) ], 
-                [symbol * -0.8  , symbol * 0     , np.mod(pi/2   + th ,2*pi) ],
-                [symbol * -0.8  , symbol *  0.2  , np.mod(pi/3   + th ,2*pi) ],
-                [symbol * -0.5  , symbol *  0.2  , np.mod(0      + th ,2*pi) ],
-                [symbol * 0     , symbol * 0.4   , np.mod(pi*4/5 + th ,2*pi) ], # (2)
-                [symbol * 0     , symbol * 0.4   , np.mod(-pi/2  + th ,2*pi) ],
-                [symbol * 0.2   , symbol * 0.4   , np.mod( 0     + th ,2*pi) ],
-                [symbol * 0.2   , symbol * 0.4   ,-np.mod(pi/3   + th ,2*pi) ],
-                [symbol * 0.5   , symbol *   0   , np.mod(pi     + th ,2*pi) ], #（3）
-                [symbol * 0.5   , symbol *   0   , np.mod(-pi/2  + th ,2*pi) ],
-                [symbol * 0.2   , symbol * -0.4  , np.mod( pi    + th ,2*pi) ],
-                [symbol * 0.2   , symbol * -0.4  , np.mod(-pi/3  + th ,2*pi) ],
-                [symbol * 0     , symbol * -0.4  , np.mod( 0     + th ,2*pi) ], # (4)
-                [symbol * 0     , symbol * -0.4  , np.mod(-pi*4/5+ th ,2*pi) ],
-                [symbol * 0     , symbol * -0.4  , np.mod( pi    + th ,2*pi) ],
-                [symbol * -0.5  , symbol * 0     , np.mod( pi    + th ,2*pi) ] # (5) 
-        ])   
-        
-        idx=0
-        '''  
         is_patrol_mode_prev = False
         is_patrol_mode = True
         # cnt = 0
@@ -297,19 +262,15 @@ class NaviBot():
                 # 敵の方向を向くモード
                 self.client.cancel_all_goals()
                 twist = Twist()
-                twist.angular.z = radians(degrees(self.near_enemy_twist.angular.z))
+                # twist.angular.z = radians(degrees(self.near_enemy_twist.angular.z))
                 # twist.linear.x  = self.speed
-                self.vel_pub.publish(twist)
-                
-                # import pdb; pdb.set_trace()
-        
-                # print("POSE TWIST: {}, {}".format(self.pose_twist.linear.x, self.pose_twist.angular.z))
-                # print("ENEMY TWIST: {}, {}".format(self.near_enemy_twist.linear.x, self.near_enemy_twist.angular.z))
-                # print("wall: {}, Enemy: {}, X: {}, Z: {}".format(self.is_near_wall, self.is_near_enemy, twist.linear.x, twist.angular.z))
-                
                 # self.vel_pub.publish(twist)
-                # pass
                 
+                twist = Twist()
+                #twist.linear.x = 0.1
+                twist.angular.z = self.enemy_rad
+                self.vel_pub.publish(twist)
+
                 
             is_patrol_mode_prev = is_patrol_mode
 
